@@ -21,6 +21,10 @@ namespace Minicop.Game.GravityRave
             }
         }
 
+        /// <summary>
+        /// Закрытие и раскрытие панели
+        /// </summary>
+        /// <param name="id">id панели</param>
         public void Select(int id) => Select(id, OpenTime, CloseTime);
         public void Select(int id, float openTime, float closeTime)
         {

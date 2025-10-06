@@ -5,6 +5,9 @@ using Mirror;
 
 namespace Minicop.Game.GravityRave
 {
+    /// <summary>
+    /// Общий ввод
+    /// </summary>
     [DisallowMultipleComponent]
     public class InputPlayer : NetworkBehaviour
     {
@@ -121,6 +124,10 @@ namespace Minicop.Game.GravityRave
             }
             else moveEvents.OnStay.Invoke();
         }
+
+        /// <summary>
+        /// Переключения состояния меню
+        /// </summary>
         public void SwithcMenu()
         {
             isMenuOpen = !isMenuOpen;

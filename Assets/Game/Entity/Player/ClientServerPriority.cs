@@ -12,6 +12,9 @@ namespace Minicop.Game.GravityRave
         public List<GameObject> ClientObjects;
         public List<GameObject> ServerObjects;
 
+/// <summary>
+/// Разграничение обьектов которые должны пренадлежать только серверу/клиенту/локально
+/// </summary>
         private void Start()
         {
             List<GameObject> gameObjects = LocalClientObjects.Concat(ClientObjects).Concat(ServerObjects).ToList();

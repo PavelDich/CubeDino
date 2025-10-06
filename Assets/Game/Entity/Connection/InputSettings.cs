@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Minicop.Game.GravityRave
 {
+    /// <summary>
+    /// Горячие клавишы ввода
+    /// </summary>
     [CreateAssetMenu(fileName = "InputSettings", menuName = "Game/Entity/Player/Input", order = 1)]
     public class InputSettings : ScriptableObject
     {

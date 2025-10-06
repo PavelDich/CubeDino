@@ -25,6 +25,9 @@ namespace Minicop.Game.CubeDino
         private NetworkIdentity _player;
         public UnityEvent OnPlayerSpawned = new UnityEvent();
 
+        /// <summary>
+        /// Вызов появления игрока
+        /// </summary>
         public void SpawnPlayer()
         {
             CmdSpawnPlayer(NetworkLevel.LocalConnection, ConnectionInfo.LocalName);

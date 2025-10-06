@@ -16,6 +16,9 @@ namespace Minicop.Game.CubeDino
         private NetworkManager _networkManager;
         private NetworkLevel _scene;
 
+        /// <summary>
+        /// Моментальная загрузка подсцены
+        /// </summary>
         private void Start()
         {
 #if DEVELOPMENT_BUILD || UNITY_EDITOR

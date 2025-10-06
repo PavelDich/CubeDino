@@ -16,7 +16,12 @@ namespace Minicop.Game.CubeDino
             Lobby.OnRoomOnlineChange.AddListener(Refresh);
         }
 
-        public void Refresh(int id)
+        /// <summary>
+        /// Обновление списка комнат
+        /// </summary>
+        /// <param name="id"></param>
+        public void Refresh(int id) => Refresh();
+        public void Refresh()
         {
             for (int i = 0; i < _panels.Count; i++)
                 Destroy(_panels[i].gameObject);
@@ -34,6 +39,10 @@ namespace Minicop.Game.CubeDino
         private RoomPanel _panelVariant;
         [SerializeField]
         private Transform _panelsParent;
+        /// <summary>
+        /// Создание панели подключения к комнате
+        /// </summary>
+        /// <param name="id">id комнаты на которую ссылаеться панель</param>
         public void AddPanel(int id)
         {
             try

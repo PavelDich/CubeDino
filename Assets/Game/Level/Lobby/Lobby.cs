@@ -34,6 +34,11 @@ namespace Minicop.Game.CubeDino
         [Scene]
         public string Room;
 
+        /// <summary>
+        /// Подключение к комнате
+        /// </summary>
+        /// <param name="id">id комнаты</param>
+        /// <param name="password">пароль комнаты</param>
         public void Connect(int id, string password)
         {
             CmdOpen(NetworkLevel.LocalConnection, id, password);
@@ -55,6 +60,11 @@ namespace Minicop.Game.CubeDino
             RoomsData[id] = (Room.Data)Rooms[id].GetData();
         }
 
+        /// <summary>
+        /// Покинуть комнату, вызываеться в комнате самой комнатой. Пересылает на сцену расположения лобби
+        /// </summary>
+        /// <param name="networkIdentity">перемещаемое подключение</param>
+        /// <param name="id">id из какой комнаты</param>
         [Server]
         public void SrvLeaveRoom(NetworkIdentity networkIdentity, int id)
         {
@@ -66,7 +76,12 @@ namespace Minicop.Game.CubeDino
         }
 
 
-
+        /// <summary>
+        /// Создает комнату
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="password"></param>
+        /// <param name="connectionMax"></param>
         public void Create(string name, string password, int connectionMax)
         {
             CmdCreate(NetworkLevel.LocalConnection, name, password, connectionMax);
@@ -124,6 +139,10 @@ namespace Minicop.Game.CubeDino
 
         }
 
+        /// <summary>
+        /// Удаляет комнату из списка активных комнат
+        /// </summary>
+        /// <param name="id"></param>
         [Server]
         private void SrvRemove(int id)
         {

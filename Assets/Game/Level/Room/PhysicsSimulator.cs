@@ -13,6 +13,9 @@ namespace Minicop.Game.CubeDino
         bool simulatePhysicsScene;
         bool simulatePhysicsScene2D;
 
+        /// <summary>
+        /// Усечение просчета физики на клиенте для избежания читерства
+        /// </summary>
         void Awake()
         {
             if (NetworkServer.active)
@@ -29,6 +32,9 @@ namespace Minicop.Game.CubeDino
             }
         }
 
+        /// <summary>
+        /// Ручная симуляция физики отдельно в сцене
+        /// </summary>
         [ServerCallback]
         void FixedUpdate()
         {

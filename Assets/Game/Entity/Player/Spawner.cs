@@ -15,6 +15,11 @@ namespace Minicop.Game.CubeDino
         }
         [SerializeField]
         private NetworkIdentity _object;
+
+
+        /// <summary>
+        /// Спавн обьекта перед лицом
+        /// </summary>
         public void Spawn()
         {
             CmdSpawn();

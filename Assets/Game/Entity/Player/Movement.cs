@@ -28,64 +28,78 @@ namespace Minicop.Game.CubeDino
         private float _rotateSpeed = 1f;
         private float _rotationY;
         private float _rotationX;
+
+        /// <summary>
+        /// Вращение камерой, вертикальная ось отключена из-за ненадобности
+        /// </summary>
+        /// <param name="direction"></param>
         public void Rotate(Vector2 direction)
         {
             CmdRotate(direction);
-            [Command(requiresAuthority = false)]
-            void CmdRotate(Vector2 direction)
-            {
+        }
+        [Command(requiresAuthority = false)]
+        void CmdRotate(Vector2 direction)
+        {
 #if DEVELOPMENT_BUILD || UNITY_EDITOR
-                //_rotationY -= direction.y * _rotateSpeed * Time.deltaTime;
-                //_rotationY = Mathf.Clamp(_rotationY, -90, 90);
-                _rotationX += direction.x * _rotateSpeed * Time.deltaTime;
-                _transform.rotation = Quaternion.Euler(0f, _rotationX, 0f);
+            //_rotationY -= direction.y * _rotateSpeed * Time.deltaTime;
+            //_rotationY = Mathf.Clamp(_rotationY, -90, 90);
+            _rotationX += direction.x * _rotateSpeed * Time.deltaTime;
+            _transform.rotation = Quaternion.Euler(0f, _rotationX, 0f);
 #endif
-            }
         }
 
-
+        /// <summary>
+        /// Вызов состояния стояния для корректной работы ивентов
+        /// </summary>
         public void Stand()
         {
             OnStand.Invoke();
             CmdStand();
-            [Command(requiresAuthority = false)]
-            void CmdStand()
-            {
-                OnStand.Invoke();
-            }
+        }
+        [Command(requiresAuthority = false)]
+        void CmdStand()
+        {
+            OnStand.Invoke();
         }
         [SerializeField]
         private float _speedMax = 1f;
         [SyncVar]
         public float Speed = 5f;
+        /// <summary>
+        /// Движение
+        /// </summary>
+        /// <param name="direction">направление в трех осях</param>
         public void Move(Vector3 direction)
         {
             if (direction == Vector3.zero) return;
             CmdMove(direction);
-            [Command(requiresAuthority = false)]
-            void CmdMove(Vector3 direction)
-            {
+        }
+        [Command(requiresAuthority = false)]
+        void CmdMove(Vector3 direction)
+        {
 #if DEVELOPMENT_BUILD || UNITY_EDITOR
-                OnMove.Invoke();
-                _transform.Translate(direction.x * Speed, 0f, direction.z * Speed);
-                return;
-                _rigidbody.AddRelativeForce(new Vector3(direction.x, 0f, direction.y) * Speed * Time.fixedDeltaTime);
-                float speed = Vector3.Magnitude(_rigidbody.velocity);
-                if (speed > _speedMax)
-                {
-                    float brakeSpeed = speed - _speedMax;
-                    Vector3 normalisedVelocity = _rigidbody.velocity.normalized;
-                    Vector3 brakeVelocity = normalisedVelocity * brakeSpeed;
-                    _rigidbody.AddForce(-brakeVelocity);
-                }
-#endif
+            OnMove.Invoke();
+            _transform.Translate(direction.x * Speed, 0f, direction.z * Speed);
+            return;
+            _rigidbody.AddRelativeForce(new Vector3(direction.x, 0f, direction.y) * Speed * Time.fixedDeltaTime);
+            float speed = Vector3.Magnitude(_rigidbody.velocity);
+            if (speed > _speedMax)
+            {
+                float brakeSpeed = speed - _speedMax;
+                Vector3 normalisedVelocity = _rigidbody.velocity.normalized;
+                Vector3 brakeVelocity = normalisedVelocity * brakeSpeed;
+                _rigidbody.AddForce(-brakeVelocity);
             }
+#endif
         }
 
 
 
         [SyncVar]
         public float JumpForce = 5f;
+        /// <summary>
+        /// Тестовый вызов RPC на всех клиента, закомментированна механика прыжка из-за ненадобности
+        /// </summary>
         public void Jump()
         {
             CmdJump(ConnectionInfo.LocalName);

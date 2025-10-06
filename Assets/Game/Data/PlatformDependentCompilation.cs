@@ -36,9 +36,9 @@ namespace Minicop.Game.CubeDino
 #if DEVELOPMENT_BUILD
             CreateServer();
 #elif UNITY_WEBGL
-            ConnectServer();
+            //ConnectServer();
 #elif !UNITY_EDITOR
-            ConnectServer();
+            //ConnectServer();
 #endif
         }
 
